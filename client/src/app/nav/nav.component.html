@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">Dating App</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="accountService.currentUser$ | async">
+          <li class="nav-item">
+            <a class="nav-link"  href="#">Matches</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Lists</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Messages</a>
+          </li>
+        </ul>
+        <div *ngIf="accountService.currentUser$ | async" class="btn-group" dropdown>
+          <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                  aria-controls="dropdown-basic">
+            user name <span class="caret"></span>
+          </button>
+          <ul  id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><a class="dropdown-item" href="#">Edit Profile  </a></li>
+            <li class="divider dropdown-divider"></
+              
+              li>
+            <li role="menuitem"><a class="dropdown-item" href="#"  (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </div>
+        <form *ngIf="(accountService.currentUser$ | async)==null" #frm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off" >
+          <input name="username" [(ngModel)]="model.username"   class="form-control me-2" type="text" placeholder="User name">
+          <input [(ngModel)]="model.password" name="password"   class="form-control me-2" type="password" placeholder="Password" >
+          <button class="btn btn-outline-success" type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </nav>

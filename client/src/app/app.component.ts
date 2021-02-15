@@ -10,7 +10,7 @@ import { AccountService } from './_services/account.service';
 })
 export class AppComponent implements OnInit {
   title = 'Dating App';
-  users:any;
+  
   
   constructor(private http:HttpClient, private accountService:AccountService)
   {
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   ngOnInit()
   {
      this.setCurrentUser();
-     this.getusers(); 
+    
   }
 
   setCurrentUser()
@@ -28,11 +28,5 @@ export class AppComponent implements OnInit {
     const user:User=JSON.parse(localStorage.getItem('user'));
     this.accountService.setCurrentUser(user);
   }
-  getusers()
-  {
-    return  this.http.get('https://localhost:5001/api/users').subscribe(response=>{
-      this.users=response;
-    },error=>{console.log(console.error())}
-    );
-  }
+  
 }

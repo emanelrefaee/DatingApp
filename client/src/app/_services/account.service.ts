@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { stringify } from '@angular/compiler/src/util';
 import { User } from '../_models/User';
 import { ReplaySubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,21 @@ export class AccountService {
         }
       })
     );
+  }
+  register(model:any)
+  {
+      return this.http.post(this.baseUrl+'accounts/register',model).pipe
+      (
+        map((response:User)=>{
+           const user=response;
+           if(user)
+           {
+               localStorage.setItem('user',JSON.stringify(user));
+               this.currentUserSOurce.next(user);
+
+           }
+        })
+      );
   }
   setCurrentUser(user:User)
   {
